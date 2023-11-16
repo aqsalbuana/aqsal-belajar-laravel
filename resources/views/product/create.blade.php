@@ -1,4 +1,4 @@
-@extends('layouts.core.main')
+@extends('layouts.core.content')
 @section('title', 'Tambah Produk')
 @section('content')
     <div class="row">

@@ -1,4 +1,4 @@
-@extends('layouts.core.main')
+@extends('layouts.core.content')
 @section('title', 'Data Produk')
 @section('content')
     <div class="row">
@@ -22,7 +22,7 @@
                             <tr>
                                 <th class="text-center">No.</th>
                                 <th class="text-center">Gambar</th>
-                                <th class="text-center">Kategori ID</th>
+                                <th class="text-center">Kategori</th>
                                 <th class="text-center">Kode Produk</th>
                                 <th class="text-center">Nama Produk</th>
                                 <th class="text-center">Deskripsi</th>
@@ -37,8 +37,11 @@
                             @foreach ($products as $data)
                                 <tr>
                                     <td style="vertical-align: middle" class="text-center">{{ $loop->iteration }}</td>
-                                    <td><img src="{{ asset('assets/img/' . $data->image) }}" width="100" height="150"></td>
-                                    <td style="vertical-align: middle" class="text-center">{{ $data->category_id }}</td>
+                                    <td><img src="{{ asset('assets/img/' . $data->image) }}" width="100" height="150">
+                                    </td>
+                                    <td style="vertical-align: middle" class="text-center">
+                                        {{ $data->category_id == 1 ? 'Poster A3' : ($data->category_id == 2 ? 'Poster A4' : 'Poster A5') }}
+                                    </td>
                                     <td style="vertical-align: middle" class="text-center">{{ $data->product_code }}</td>
                                     <td style="vertical-align: middle">{{ $data->product_name }}</td>
                                     <td class="text-wrap">{{ Str::limit($data->description, 50, '...') }}</td>
@@ -48,13 +51,15 @@
                                     <td style="vertical-align: middle" class="text-center">{{ $data->stock }}</td>
                                     <td style="vertical-align: middle">
                                         <div class="d-flex">
-                                            <a href="{{ route('edit-produk', Crypt::encrypt($data->id)) }}" class="btn btn-sm btn-warning mr-1"><i
-                                                    class="fas fa-edit"></i></a>
-                                            <form action="{{ route('hapus-produk', Crypt::encrypt($data->id)) }}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin menghapus data produk ini?')"><i
-                                                    class="fas fa-trash-alt"></i></button>
+                                            <a href="{{ route('edit-produk', Crypt::encrypt($data->id)) }}"
+                                                class="btn btn-sm btn-warning mr-1"><i class="fas fa-edit"></i></a>
+                                            <form action="{{ route('hapus-produk', Crypt::encrypt($data->id)) }}"
+                                                method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-danger"
+                                                    onclick="return confirm('Anda yakin ingin menghapus data produk ini?')"><i
+                                                        class="fas fa-trash-alt"></i></button>
                                             </form>
                                         </div>
                                     </td>
