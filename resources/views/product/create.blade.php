@@ -143,13 +143,6 @@
                                     </div>
                                 @enderror
                             </div>
-
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-save"></i>
-                                    Simpan</button>
-                                <a href="{{ route('produk') }}" class="btn btn-sm btn-secondary"><i
-                                        class="fas fa-arrow-alt-circle-left"></i> Kembali</a>
-                            </div>
                         @else
                             <div class="alert alert-warning alert-dismissible">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -157,6 +150,12 @@
                                 Data Kategori masih kosong. Silahkan input datanya terlebih dahulu.
                             </div>
                         @endif
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-save"></i>
+                            Simpan</button>
+                        <a href="{{ route('produk') }}" class="btn btn-sm btn-secondary"><i
+                                class="fas fa-arrow-alt-circle-left"></i> Kembali</a>
                     </div>
                     <!-- /.card-body -->
                 </form>

@@ -151,4 +151,13 @@ class ProductController extends Controller
             return redirect()->route('produk')->with('success', 'Data produk berhasil dihapus.');
         }
     }
+
+    public function list()
+    {
+        $product = DB::table('products')
+        ->select('products.*', 'product_categories.id AS category_id', 'product_categories.category_name')
+        ->join('product_categories', 'products.category_id', '=', 'product_categories.id')
+        ->orderBy('products.id', 'DESC')->get();
+        return view('product.list', ['products' => $product]);
+    }
 }

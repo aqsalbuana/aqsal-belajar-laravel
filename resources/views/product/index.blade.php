@@ -45,9 +45,9 @@
                                     <td style="vertical-align: middle" class="text-center">{{ $data->product_code }}</td>
                                     <td style="vertical-align: middle">{{ $data->product_name }}</td>
                                     <td class="text-wrap">{{ Str::limit($data->description, 50, '...') }}</td>
-                                    <td style="vertical-align: middle">Rp. {!! number_format($data->price, 0, ',', '.') !!}</td>
+                                    <td style="vertical-align: middle">Rp. {!! number_format($data->price, 0, '.', ',') !!}</td>
                                     <td style="vertical-align: middle" class="text-center">{{ $data->unit }}</td>
-                                    <td style="vertical-align: middle">Rp. {!! number_format($data->discount_amount, 0, ',', '.') !!}</td>
+                                    <td style="vertical-align: middle">Rp. {!! number_format($data->discount_amount, 0, '.', ',') !!}</td>
                                     <td style="vertical-align: middle" class="text-center">{{ $data->stock }}</td>
                                     <td style="vertical-align: middle">
                                         <div class="d-flex">

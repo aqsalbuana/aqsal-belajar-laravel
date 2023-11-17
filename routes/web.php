@@ -24,6 +24,7 @@ Route::middleware(['auth', 'group:1,2,3'])->group(function () {
         $totalProduct = DB::table('products')->count();
         return view('dashboard', ['totalProduct' => $totalProduct]);
     })->name('dashboard');
+    Route::get('list-produk', [ProductController::class, 'list'])->name('list-produk');
     Route::get('data-produk', [ProductController::class, 'index'])->name('produk');
     Route::get('tambah-produk', [ProductController::class, 'create'])->name('tambah-produk');
     Route::get('edit-produk/{produk}', [ProductController::class, 'edit'])->name('edit-produk');
