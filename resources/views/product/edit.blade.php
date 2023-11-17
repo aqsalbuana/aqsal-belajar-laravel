@@ -13,153 +13,163 @@
                     @csrf
                     @method('PUT')
                     <div class="card-body">
-                        <div class="form-group">
-                            <label for="product_code">Kode Produk</label>
-                            <input type="text" class="form-control-plaintext" name="product_code"
-                                value="{{ $product->product_code }}" id="product_code" readonly>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col-lg-4">
-                                <label for="product_name">Nama Produk</label>
-                                <input type="text" class="form-control @error('product_name') is-invalid @enderror"
-                                    name="product_name" id="product_name" autofocus value="{{ $product->product_name }}">
-                                @error('product_name')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                        @if (count($categories) > 0)
+
+                            <div class="form-group">
+                                <label for="product_code">Kode Produk</label>
+                                <input type="text" class="form-control-plaintext" name="product_code"
+                                    value="{{ $product->product_code }}" id="product_code" readonly>
                             </div>
-                            <div class="col-lg-4">
-                                <label for="category_id">Kategori</label>
-                                <select
-                                    class="custom-select form-control-border border-width-2 @error('category_id')
+                            <div class="row form-group">
+                                <div class="col-lg-4">
+                                    <label for="product_name">Nama Produk</label>
+                                    <input type="text" class="form-control @error('product_name') is-invalid @enderror"
+                                        name="product_name" id="product_name" autofocus
+                                        value="{{ $product->product_name }}">
+                                    @error('product_name')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="category_id">Kategori</label>
+                                    <select
+                                        class="custom-select form-control-border border-width-2 @error('category_id')
                                     is-invalid
                                 @enderror"
-                                    name="category_id" id="category_id">
-                                    @if (count($categories) < 0)
-                                        <option selected disabled>-- Kategori Masih Kosong. --</option>
-                                    @else
-                                    <option selected disabled>-- Pilih Kategori --</option>
+                                        name="category_id" id="category_id">
+                                        <option disabled>-- Pilih Kategori --</option>
                                         @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}" {{ $product->category_id == $category->id ? "selected" : "" }}>{{ $category->category_name }}</option>
+                                            <option value="{{ $category->id }}"
+                                                {{ $product->category_id == $category->id ? 'selected' : '' }}>
+                                                {{ $category->category_name }}</option>
                                         @endforeach
-                                    @endif
-                                </select>
-                                @error('category_id')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="stock">Stok</label>
-                                <input type="text"
-                                    class="form-control @error('stock')
+                                    </select>
+                                    @error('category_id')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="stock">Stok</label>
+                                    <input type="text"
+                                        class="form-control @error('stock')
                                     is-invalid
                                 @enderror"
-                                    name="stock" id="stock" value="{{ $product->stock }}">
-                                @error('stock')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                                        name="stock" id="stock" value="{{ $product->stock }}">
+                                    @error('stock')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col-lg-4">
-                                <label for="price">Harga</label>
-                                <div
-                                    class="input-group @error('price')
+                            <div class="row form-group">
+                                <div class="col-lg-4">
+                                    <label for="price">Harga</label>
+                                    <div
+                                        class="input-group @error('price')
                                     is-invalid
                                 @enderror">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Rp.</span>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Rp.</span>
+                                        </div>
+                                        <input type="text" class="form-control" name="price" id="price"
+                                            value="{{ $product->price }}">
                                     </div>
-                                    <input type="text" class="form-control" name="price" id="price"
-                                        value="{{ $product->price }}">
+                                    @error('price')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
-                                @error('price')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="unit">Satuan</label>
-                                <select
-                                    class="custom-select form-control-border border-width-2 @error('unit')
+                                <div class="col-lg-4">
+                                    <label for="unit">Satuan</label>
+                                    <select
+                                        class="custom-select form-control-border border-width-2 @error('unit')
                                     is-invalid
                                 @enderror"
-                                    name="unit" id="unit">
-                                    <option disabled>- Pilih Satuan Unit</option>
-                                    <option value="PCS" {{ $product->unit == "PCS" ? "selected" : "" }}>PCS</option>
-                                    <option value="LBR" {{ $product->unit == "LBR" ? "selected" : "" }}>LBR</option>
-                                </select>
-                                @error('unit')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="discount_amount">Diskon</label>
-                                <div
-                                    class="input-group @error('discount_amount')
+                                        name="unit" id="unit">
+                                        <option disabled>- Pilih Satuan Unit</option>
+                                        <option value="PCS" {{ $product->unit == 'PCS' ? 'selected' : '' }}>PCS</option>
+                                        <option value="LBR" {{ $product->unit == 'LBR' ? 'selected' : '' }}>LBR</option>
+                                    </select>
+                                    @error('unit')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="discount_amount">Diskon</label>
+                                    <div
+                                        class="input-group @error('discount_amount')
                                     is-invalid
                                 @enderror">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Rp.</span>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Rp.</span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{ $product->discount_amount }}"
+                                            name="discount_amount" id="discount_amount">
                                     </div>
-                                    <input type="text" class="form-control" value="{{ $product->discount_amount }}"
-                                        name="discount_amount" id="discount_amount">
+                                    @error('discount_amount')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
-                                @error('discount_amount')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
                             </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col-lg-2 text-center text-lg-left mb-lg-0 mb-2">
-                                <img src="{{ asset('assets/img/' . $product->image) }}" alt="" class="img-thumbnail">
-                            </div>
-                            <div class="col-lg-10">
-                                <label for="image">Gambar <sup class="text-danger">(png,jpg,jpeg | 1MB)</sup></label>
-                            <div
-                                class="input-group @error('image')
+                            <div class="row form-group">
+                                <div class="col-lg-2 text-center text-lg-left mb-lg-0 mb-2">
+                                    <img src="{{ asset('assets/img/' . $product->image) }}" alt=""
+                                        class="img-thumbnail">
+                                </div>
+                                <div class="col-lg-10">
+                                    <label for="image">Gambar <sup class="text-danger">(png,jpg,jpeg | 1MB)</sup></label>
+                                    <div
+                                        class="input-group @error('image')
                             is-invalid
                             @enderror">
-                                <input type="file" class="form-control" name="image" id="image">
-                            </div>
-                            @error('image')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
+                                        <input type="file" class="form-control" name="image" id="image">
+                                    </div>
+                                    @error('image')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
-                            @enderror
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="description">Deskripsi</label>
-                            <textarea
-                                class="form-control @error('description')
+                            <div class="form-group">
+                                <label for="description">Deskripsi</label>
+                                <textarea
+                                    class="form-control @error('description')
                                     is-invalid
                                 @enderror"
-                                rows="3" name="description" id="description">{{ $product->description }}</textarea>
-                            @error('description')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
+                                    rows="3" name="description" id="description">{{ $product->description }}</textarea>
+                                @error('description')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-save"></i>
+                                    Perbarui</button>
+                                <a href="{{ route('produk') }}" class="btn btn-sm btn-secondary"><i
+                                        class="fas fa-arrow-alt-circle-left"></i> Kembali</a>
+                            </div>
+                        @else
+                            <div class="alert alert-warning alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <h5><i class="icon fas fa-exclamation-triangle"></i> Peringatan!</h5>
+                                Data Kategori masih kosong. Silahkan input datanya terlebih dahulu.
+                            </div>
+                        @endif
                     </div>
                     <!-- /.card-body -->
-
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-save"></i> Perbarui</button>
-                        <a href="{{ route('produk') }}" class="btn btn-sm btn-secondary"><i
-                                class="fas fa-arrow-alt-circle-left"></i> Kembali</a>
-                    </div>
                 </form>
             </div>
         </div>
