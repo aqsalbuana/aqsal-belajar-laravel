@@ -11,15 +11,19 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $product = DB::table('products')->orderBy('products.id', 'DESC')->get();
+        $product = DB::table('products')
+                    ->select('products.*', 'product_categories.id AS category_id', 'product_categories.category_name')
+                    ->join('product_categories', 'products.category_id', '=', 'product_categories.id')
+                    ->orderBy('products.id', 'DESC')->get();
         return view('product.index', ['products' => $product]);
     }
 
     public function create()
     {
         $faker = Faker::create();
-        $productCode = $faker->numerify('P-#####');
-        return view('product.create', ['productCode' => $productCode]);
+        $productCode = $faker->unique()->numerify('P-#####');
+        $categories  = DB::table('product_categories')->get();
+        return view('product.create', ['productCode' => $productCode, 'categories' => $categories]);
     }
 
     public function store(Request $request)
@@ -69,8 +73,9 @@ class ProductController extends Controller
 
     public function edit($id)
     {
-        $product = DB::table('products')->find(Crypt::decrypt($id));
-        return view('product.edit', ['product' => $product]);
+        $product = DB::table('products')->find(Crypt::decrypt($id));    
+        $categories = DB::table('product_categories')->get();
+        return view('product.edit', ['product' => $product, 'categories' => $categories]);
     }
 
     public function update(Request $request, $id)

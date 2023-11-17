@@ -35,10 +35,14 @@
                                     is-invalid
                                 @enderror"
                                     name="category_id" id="category_id">
+                                    @if (count($categories) < 0)
+                                        <option selected disabled>-- Kategori Masih Kosong. --</option>
+                                    @else
                                     <option selected disabled>-- Pilih Kategori --</option>
-                                    <option value="1">Poster A3</option>
-                                    <option value="2">Poster A4</option>
-                                    <option value="3">Poster A5</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                        @endforeach
+                                    @endif
                                 </select>
                                 @error('category_id')
                                     <div class="invalid-feedback">
