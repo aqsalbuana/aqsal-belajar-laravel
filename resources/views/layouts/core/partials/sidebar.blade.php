@@ -14,7 +14,7 @@
           <img src="{{ asset('assets/img/user.png') }}" class="img-circle" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block">{{ Auth::user()->name }}</a>
         </div>
       </div>
 
@@ -47,7 +47,7 @@
             </ul>
           </li> --}}
           <li class="nav-item">
-            <a href="/" class="nav-link {{ Request::is('/') ? "active" : "" }}">
+            <a href="{{ route('dashboard') }}" class="nav-link {{ Request::is('dashboard') ? "active" : "" }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard

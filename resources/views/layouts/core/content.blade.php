@@ -13,7 +13,7 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              @if (!Request::is('/'))
+              @if (!Request::is('dashboard'))
                 <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
               @endif
               <li class="breadcrumb-item active">@yield('title')</li>

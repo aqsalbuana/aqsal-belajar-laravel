@@ -2,18 +2,39 @@
 @section('title', 'Dashboard')
 @section('content')
     <div class="row">
+        <div class="col-lg-12">
+            <div class="callout callout-info">
+                <h2>Selamat Datang!</h2>
+
+                <dl class="row">
+                  <dt class="col-sm-4">Nama</dt>
+                  <dd class="col-sm-8">{{ Auth::user()->name }}</dd>
+                  <dt class="col-sm-4">Username</dt>
+                  <dd class="col-sm-8">{{ Auth::user()->username }}</dd>
+                  <dt class="col-sm-4">Email</dt>
+                  <dd class="col-sm-8">{{ Auth::user()->email }}</dd>
+                  <dt class="col-sm-4">Nomer telepon</dt>
+                  <dd class="col-sm-8">{{ Auth::user()->phone_number }}</dd>
+                  <dt class="col-sm-4">Terakhir Login</dt>
+                  <dd class="col-sm-8">{{ Auth::user()->last_login_at == null ? "-" : Auth::user()->last_login_at }}</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-lg-4 col-12">
             <!-- small box -->
             <div class="small-box bg-info">
                 <div class="inner">
                     <h3>{{ $totalProduct }}</h3>
-                    
+
                     <p>Produk</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-bag"></i>
                 </div>
-                <a href="{{ route('produk') }}" class="small-box-footer">Lihat Detail <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="{{ route('produk') }}" class="small-box-footer">Lihat Detail <i
+                        class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
