@@ -152,8 +152,10 @@
                         @endif
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-save"></i>
-                            Simpan</button>
+                        @if (count($categories) > 0)
+                            <button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-save"></i>
+                                Simpan</button>
+                        @endif
                         <a href="{{ route('produk') }}" class="btn btn-sm btn-secondary"><i
                                 class="fas fa-arrow-alt-circle-left"></i> Kembali</a>
                     </div>

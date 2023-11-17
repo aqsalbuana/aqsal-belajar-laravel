@@ -154,21 +154,22 @@
                                     </div>
                                 @enderror
                             </div>
-
-                            @else
+                        @else
                             <div class="alert alert-warning alert-dismissible">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                                 <h5><i class="icon fas fa-exclamation-triangle"></i> Peringatan!</h5>
                                 Data Kategori masih kosong. Silahkan input datanya terlebih dahulu.
                             </div>
-                            @endif
-                        </div>
-                        <div class="card-footer">
+                        @endif
+                    </div>
+                    <div class="card-footer">
+                        @if (count($categories) > 0)
                             <button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-save"></i>
                                 Perbarui</button>
-                            <a href="{{ route('produk') }}" class="btn btn-sm btn-secondary"><i
-                                    class="fas fa-arrow-alt-circle-left"></i> Kembali</a>
-                        </div>
+                        @endif
+                        <a href="{{ route('produk') }}" class="btn btn-sm btn-secondary"><i
+                                class="fas fa-arrow-alt-circle-left"></i> Kembali</a>
+                    </div>
                     <!-- /.card-body -->
                 </form>
             </div>
