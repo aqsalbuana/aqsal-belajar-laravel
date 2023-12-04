@@ -136,7 +136,7 @@
                                     class="form-control @error('description')
                                     is-invalid
                                 @enderror"
-                                    rows="3" name="description" id="description"></textarea>
+                                    rows="3" name="description" id="description">{{ old('description') }}</textarea>
                                 @error('description')
                                     <div class="invalid-feedback">
                                         {{ $message }}
