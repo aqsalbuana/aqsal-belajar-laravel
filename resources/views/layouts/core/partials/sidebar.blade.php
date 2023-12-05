@@ -14,7 +14,7 @@
           <img src="{{ asset('assets/img/user.png') }}" class="img-circle" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+          <a href="#" class="d-block">{{ Auth::user()->username }}</a>
         </div>
       </div>
 

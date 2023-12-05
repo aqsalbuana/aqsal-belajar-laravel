@@ -19,6 +19,8 @@ use App\Models\ProductCategory;
 */
 
 Route::get('/', [AuthController::class, 'login'])->name('login');
+Route::get('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/proses-register', [AuthController::class, 'doregister'])->name('proses-register');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('/proses-login', [AuthController::class, 'dologin'])->name('proses-login');
 Route::middleware(['auth', 'group:1,2,3'])->group(function () {

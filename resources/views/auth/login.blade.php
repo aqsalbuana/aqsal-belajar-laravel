@@ -77,13 +77,9 @@
                     </a>
                 </div> --}}
                 <!-- /.social-auth-links -->
-
-                {{-- <p class="mb-1">
-                    <a href="forgot-password.html">I forgot my password</a>
+                <p class="mt-2 mb-0 text-center">
+                    <a href="{{ route('register') }}" class="text-center">Belum punya akun? register disini.</a>
                 </p>
-                <p class="mb-0">
-                    <a href="register.html" class="text-center">Register a new membership</a>
-                </p> --}}
             </div>
             <!-- /.card-body -->
         </div>
