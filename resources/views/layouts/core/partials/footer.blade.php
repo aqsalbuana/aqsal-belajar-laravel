@@ -35,7 +35,6 @@
         var totalPrice = {!! isset($totalPrice) ? json_encode($totalPrice) : 0 !!};
         var totalStock = {!! isset($totalStock) ? json_encode($totalStock) : 0 !!};
         var categories = {!! isset($categories) ? json_encode($categories) : 0 !!};
-        console.log(categories);
         Highcharts.chart('categories', {
             chart: {
                 type: 'pie'
@@ -66,9 +65,9 @@
                 data: categories.map(function(category) {
                     return {
                         name: category.category_name,
-                        y: category.product_count,
-                        harga: category.total_price,
-                        stok: category.total_stock
+                        y: parseInt(category.product_count),
+                        harga: parseFloat(category.total_price),
+                        stok: parseInt(category.total_stock)
                     };
                 })
             }]
@@ -93,7 +92,7 @@
             },
             series: [{
                 name: 'Value',
-                data: [totalProducts, totalCategories, parseFloat(totalPrice), parseInt(
+                data: [parseInt(totalProducts), parseInt(totalCategories), parseFloat(totalPrice), parseInt(
                     totalStock)]
             }]
         });
