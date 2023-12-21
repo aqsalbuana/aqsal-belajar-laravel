@@ -21,7 +21,7 @@
             </div>
         </div>
     </div>
-    @if (Auth::user()->group_id === 1)
+    @if (Auth::user()->group_id == 1)
         <div class="row">
             <div class="col-lg-3 col-6">
                 <!-- small box -->

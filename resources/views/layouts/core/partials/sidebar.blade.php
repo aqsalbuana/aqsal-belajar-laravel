@@ -51,9 +51,9 @@
                       <a href="{{ route('dashboard') }}"
                           class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}">
                           <i
-                              class="nav-icon {{ Auth::user()->group_id === 1 ? 'fas fa-tachometer-alt' : 'fas fa-home' }}"></i>
+                              class="nav-icon {{ Auth::user()->group_id == 1 ? 'fas fa-tachometer-alt' : 'fas fa-home' }}"></i>
                           <p>
-                              {{ Auth::user()->group_id === 1 ? 'Dashboard' : 'Home' }}
+                              {{ Auth::user()->group_id == 1 ? 'Dashboard' : 'Home' }}
                           </p>
                       </a>
                   </li>
@@ -74,7 +74,7 @@
               </p>
             </a>
           </li> --}}
-                  @if (Auth::user()->group_id === 1)
+                  @if (Auth::user()->group_id == 1)
                       <li class="nav-item">
                           <a href="{{ route('produk') }}"
                               class="nav-link {{ Request::is('data-produk') || Request::is('tambah-produk') || Request::is('edit-produk*') ? 'active' : '' }}">
