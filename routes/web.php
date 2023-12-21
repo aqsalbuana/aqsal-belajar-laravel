@@ -1,11 +1,13 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductController;
+use App\Models\User;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +25,7 @@ Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/proses-register', [AuthController::class, 'doregister'])->name('proses-register');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('/proses-login', [AuthController::class, 'dologin'])->name('proses-login');
-Route::middleware(['auth', 'group:1,2,3'])->group(function () {
+Route::middleware(['auth', 'group:1'])->group(function () {
     Route::get('/dashboard', function () {
         $totalProducts = Product::count();
         $totalCategories = ProductCategory::count();
@@ -43,4 +45,19 @@ Route::middleware(['auth', 'group:1,2,3'])->group(function () {
     Route::post('simpan-produk', [ProductController::class, 'store'])->name('simpan-produk');
     Route::put('update-produk/{produk}', [ProductController::class, 'update'])->name('update-produk');
     Route::delete('hapus-produk/{produk}', [ProductController::class, 'destroy'])->name('hapus-produk');
+});
+Route::middleware(['auth', 'group:1,3'])->group(function () {
+    Route::get('/dashboard', function () {
+        $totalProducts = Product::count();
+        $totalCategories = ProductCategory::count();
+        $totalPrice = Product::sum('price');
+        $totalStock = Product::sum('stock');
+        $categories = DB::table('products')
+        ->select('product_categories.category_name', DB::raw('COUNT(products.id) as product_count'), DB::raw('SUM(products.price) as total_price'), DB::raw('SUM(products.stock) as total_stock'))
+        ->join('product_categories', 'products.category_id', '=', 'product_categories.id')
+        ->groupBy('product_categories.id', 'product_categories.category_name')
+        ->get();
+        return view('dashboard', ['totalProducts' => $totalProducts, 'totalCategories' => $totalCategories, 'totalPrice' => $totalPrice, 'totalStock' => $totalStock, 'categories' => $categories]);
+    })->name('dashboard');
+    Route::get('list-produk', [ProductController::class, 'list'])->name('list-produk');
 });

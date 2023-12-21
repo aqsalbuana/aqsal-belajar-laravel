@@ -22,8 +22,8 @@ class UserGroupSeeder extends Seeder
             'description' => 'Group User Seller'
         ]);
         UserGroup::create([
-            'group_name' => 'Admin Products',
-            'description' => 'Group User Admin Products'
+            'group_name' => 'User',
+            'description' => 'Group User'
         ]);
     }
 }
